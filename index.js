@@ -20,11 +20,11 @@ const FileKeyInfo = require('xml-crypto').FileKeyInfo
 /// ///////////////////////////
 
 // API Host and Contants
-const BASE_URL = 'http://202.131.242.165:9089/api/mapi'
+const BASE_URL = 'http://most-api-url-here' // Most-оос авна
 const ENCRYPTED_FIELDS = ['traceNo', 'qrAccountNumber', 'qrCode', 'srcMsisdn', 'tan']
-const PAYEE_ID = '60883'
-const POS_ID = '60883'
-const SRC_INST_ID = '60883'
+const PAYEE_ID = '11111'    // Most-оос авна
+const POS_ID = '11111'      // Most-оос авна
+const SRC_INST_ID = '11111' // Most-оос авна
 const CURRENCY = 'MNT'
 const QR_COLOR = '#20733F'
 
@@ -134,16 +134,16 @@ function generateQr (traceNo, billId, amount, desc, lang, callback) {
   let requestBody = {
     'tranCur': CURRENCY,
     'tranAmount': amount, // amount **.00
-    'tranDesc': desc, // desc
-    'qrPaidLimit': '0', // 0 no limit
+    'tranDesc': desc,     // desc
+    'qrPaidLimit': '0',   // 0 no limit
     'qrColor': QR_COLOR,
     'qrSize': '100',
     'payeeId': PAYEE_ID,
     'posNo': POS_ID,
-    'traceNo': traceNo, // unique for every request trace no : string
-    'billId': billId, // unique for every QR invoice string
+    'traceNo': traceNo,   // unique for every request trace no : string
+    'billId': billId,     // unique for every QR invoice string
     'channel': '44',
-    'lang': lang // language code "0"-mn, "1"-en
+    'lang': lang          // language code "0"-mn, "1"-en
   }
   let mp = ['srcInstId', 'channel', 'lang', 'traceNo', 'payeeId', 'posNo', 'tranAmount', 'tranCur', 'tranDesc']
   let op = ['billId', 'deviceIP', 'deviceMac', 'deviceName']
@@ -156,15 +156,15 @@ function transferQr (traceNo, amount, desc, lang, callback) {
   let requestBody = {
     'tranCur': CURRENCY,
     'tranAmount': amount, // amount **.00
-    'tranDesc': desc, // desc
-    'qrPaidLimit': '0', // 0 no limit
+    'tranDesc': desc,     // desc
+    'qrPaidLimit': '0',   // 0 no limit
     'qrColor': QR_COLOR,
     'qrSize': '100',
     'payeeId': PAYEE_ID,
     'posNo': POS_ID,
-    'traceNo': traceNo, // unique trace no : string
+    'traceNo': traceNo,   // unique trace no : string
     'channel': '44',
-    'lang': lang // language code "0"-mn, "1"-en
+    'lang': lang          // language code "0"-mn, "1"-en
   }
   let mp = ['srcInstId', 'channel', 'lang', 'traceNo', 'qrBankCode', 'qrAccountName', 'qrAccountNumber', 'tranAmount', 'tranCur']
   let op = ['tranDesc']
@@ -177,15 +177,15 @@ function waitPaymentProcess (traceNo, amount, desc, lang, callback) {
   let requestBody = {
     'tranCur': CURRENCY,
     'tranAmount': amount, // amount **.00
-    'tranDesc': desc, // desc
-    'qrPaidLimit': '0', // 0 no limit
+    'tranDesc': desc,     // desc
+    'qrPaidLimit': '0',   // 0 no limit
     'qrColor': QR_COLOR,
     'qrSize': '100',
     'payeeId': PAYEE_ID,
     'posNo': POS_ID,
-    'traceNo': traceNo, // unique trace no : string
+    'traceNo': traceNo,   // unique trace no : string
     'channel': '44',
-    'lang': lang // language code "0"-mn, "1"-en
+    'lang': lang          // language code "0"-mn, "1"-en
   }
   let mp = ['srcInstId', 'channel', 'lang', 'qrBankCode', 'qrAccountName', 'qrAccountNumber', 'tranAmount', 'tranCur']
   let op = ['tranDesc']
@@ -197,14 +197,14 @@ function checkQrPayment (traceNo, billId, qr, lang, callback) {
   let url = BASE_URL + '/TT3065'
   let requestBody = {
     'srcInstId': SRC_INST_ID,
-    'qrCode': qr, // qr number
-    'isCheckQr': 1, // tologdsong shalgah bol 1 tsutslah bol 0
+    'qrCode': qr,         // qr number
+    'isCheckQr': 1,       // tologdsong shalgah bol 1 tsutslah bol 0
     'billId': billId,
     'payeeId': PAYEE_ID,
     'posNo': POS_ID,
-    'traceNo': traceNo, // unique trace no : string
+    'traceNo': traceNo,   // unique trace no : string
     'channel': '44',
-    'lang': lang // language code "0"-mn, "1"-en
+    'lang': lang          // language code "0"-mn, "1"-en
   }
   let mp = ['srcInstId', 'channel', 'lang', 'traceNo', 'qrCode', 'payeeId', 'posNo', 'billId', 'isCheckQr']
   let op = ['deviceIP', 'deviceMac', 'deviceName']
@@ -217,15 +217,15 @@ function checkQrPaymentBatch (traceNo, amount, desc, lang, callback) {
   let requestBody = {
     'tranCur': CURRENCY,
     'tranAmount': amount, // amount **.00
-    'tranDesc': desc, // desc
-    'qrPaidLimit': '0', // 0 no limit
+    'tranDesc': desc,     // desc
+    'qrPaidLimit': '0',   // 0 no limit
     'qrColor': QR_COLOR,
     'qrSize': '100',
     'payeeId': PAYEE_ID,
     'posNo': POS_ID,
-    'traceNo': traceNo, // unique trace no : string
+    'traceNo': traceNo,   // unique trace no : string
     'channel': '44',
-    'lang': lang // language code "0"-mn, "1"-en
+    'lang': lang          // language code "0"-mn, "1"-en
   }
   let mp = ['srcInstId', 'channel', 'lang', 'traceNo', 'qrCode', 'payeeId', 'posNo', 'isCheckQr']
   let op = ['deviceIP', 'deviceMac', 'deviceName']
@@ -240,14 +240,14 @@ function purchaseTan (billId, traceNo, amount, desc, phone, tan, lang, callback)
     'tranAmount': amount, // amount **.00
     'tranCur': CURRENCY,
     'tranDesc': desc,
-    'billId': billId, // billId
-    'srcMsisdn': phone, // Phone number
+    'billId': billId,     // billId
+    'srcMsisdn': phone,   // Phone number
     'tan': tan,
     'payeeId': PAYEE_ID,
     'posNo': POS_ID,
-    'traceNo': traceNo, // unique trace no : string
+    'traceNo': traceNo,   // unique trace no : string
     'channel': '4',
-    'lang': lang // language code "0"-mn, "1"-en
+    'lang': lang          // language code "0"-mn, "1"-en
   }
   let mp = ['srcInstId', 'channel', 'lang', 'traceNo', 'payeeId', 'posNo', 'srcMsisdn', 'tan', 'tranAmount', 'tranCur']
   let op = ['billId', 'tranDesc', 'deviceIP', 'deviceMac', 'deviceName']
@@ -273,6 +273,3 @@ module.exports.checkQrPayment = checkQrPayment
 module.exports.checkQrPaymentBatch = checkQrPaymentBatch
 module.exports.purchaseTan = purchaseTan
 module.exports.isValid = isValid
-// API QR payment verify
-
-// example
